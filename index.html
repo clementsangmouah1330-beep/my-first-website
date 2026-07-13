@@ -1,68 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My First Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Fun Facts</title>
 <style>
-body {
-  font-family: Arial;
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 20px;
-}
-nav a {
-  margin: 10px;
-  color: #0077ff;
-  text-decoration: none;
-}
-footer {
-  text-align: center;
-  margin-top: 50px;
-  color: gray;
-}
-</head>
-<body>
-<!-- Navigation Menu -->
-<nav>
-  <a href="#home">Home</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
-</nav>
-  
-  <h1>Hello from Abidjan! 🇨🇮</h1>
-  <p>This is my first project for #ShareMyProject</p>
-<p>My name is Clement</p>
-<p>I am learning to code with #ShareMyProject</p>
-  <p>I am learning to code with #ShareMyProject</p>
-  <!-- Skills Section -->
-<section id="skills">
-  <h2>My Skills</h2>
-  <ul>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>GitHub</li>
-  </ul>
-<!-- Projects Section -->
-<section id="projects">
-  <h2>My Projects</h2>
-  <p>Project #1: My first website</p>
-  <p>Project #2: Added About Me section</p>
-  <p>Project #3: Added Contact section</p>
-  <p>Project #4: Added Skills section</p>
-  <p>Project #5: Added Projects section #ShareMyProject</p>
-</section>
- <h2>My Photo</h2>
-<img src="myphoto.jpg" width="300">  
-</section>
-  <h2>Visit Google</h2>
-<a href="https://google.com">Click me</a>
-</body><!-- Contact Section -->
-<section id="contact">
-  <h2>Contact Me</h2>
-  <p>Email: clement@email.com</p>
-  <p>Location: Abidjan, CI</p>
-</section>
-<!-- Footer Section -->
-<footer>
-  <p>© 2026 Clement's Portfolio. All rights reserved.</p>
-  <p>Follow my journey: #ShareMyProject</p>
-                </footer></html>
+  body {
+      font-family: Arial, sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              display: flex;
+                  justify-content: center;
+                      align-items: center;
+                          height: 100vh;
+                              margin: 0;
+                                  color: white;
+                                      text-align: center;
+                                        }
+                                        .container {
+                                            background: rgba(255,255,255,0.1);
+                                                padding: 40px;
+                                                    border-radius: 20px;
+                                                        backdrop-filter: blur(10px);
+                                                          }
+                                                            h1 { font-size: 2.5em; margin-bottom: 20px; }
+                                                              #fact { font-size: 1.5em; margin: 30px 0; min-height: 60px; }
+                                                                button {
+                                                                    background: white;
+                                                                        color: #667eea;
+                                                                            border: none;
+                                                                                padding: 15px 30px;
+                                                                                    font-size: 1.2em;
+                                                                                        border-radius: 10px;
+                                                                                            cursor: pointer;
+                                                                                                font-weight: bold;
+                                                                                                  }
+                                                                                                    button:hover { transform: scale(1.05); }
+                                                                                                    </style>
+                                                                                                    </head>
+                                                                                                    <body>
+                                                                                                      <div class="container">
+                                                                                                          <h1>🤯 Random Fun Facts</h1>
+                                                                                                              <p id="fact">Click the button for a fun fact!</p>
+                                                                                                                  <button onclick="newFact()">New Fact</button>
+                                                                                                                    </div>
+                                                                                                                    <script>
+                                                                                                                    const facts = [
+                                                                                                                      "Honey never spoils. Archaeologists have eaten 3000 year old honey!",
+                                                                                                                        "Octopuses have 3 hearts and blue blood.",
+                                                                                                                          "A group of flamingos is called a flamboyance.",
+                                                                                                                            "Bananas are berries, but strawberries aren't.",
+                                                                                                                              "You can't hum while holding your nose shut.",
+                                                                                                                                "Sharks are older than trees.",
+                                                                                                                                  "A day on Venus is longer than a year on Venus."
+                                                                                                                                  ];
+                                                                                                                                  function newFact() {
+                                                                                                                                    const randomIndex = Math.floor(Math.random() * facts.length);
+                                                                                                                                      document.getElementById("fact").innerText = facts[randomIndex];
+                                                                                                                                      }
+                                                                                                                                      </script>
+                                                                                                                                    
+                                                                                                                                
+                                                                                                                                      </body>
+                                                                                                                                      </html>
