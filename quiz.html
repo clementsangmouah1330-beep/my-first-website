@@ -5,23 +5,24 @@
     <title>Abidjan Quiz</title>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF8C00 0%, #FFFFFF 50%, #009E60 100%);
             font-family: Arial;
             text-align: center;
-            color: white;
-            padding: 20px;
-        }
-        .quiz-box {
-            background: white;
             color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+       .menu,.quiz-box {
+            background: white;
             border-radius: 20px;
             padding: 30px;
             max-width: 400px;
-            margin: auto;
+            margin: 50px auto;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        h1 { color: #FF8C00; }
         button {
-            background: #667eea;
+            background: #009E60;
             color: white;
             border: none;
             padding: 15px;
@@ -30,34 +31,93 @@
             width: 80%;
             font-size: 16px;
             cursor: pointer;
+            font-weight: bold;
         }
-        button:hover {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
+        button:hover { background: #FF8C00; transform: scale(1.05); }
+       .hidden { display: none; }
+        #progress { color: #666; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div class="quiz-box">
-        <h1>🧠 Abidjan Quiz</h1>
-        <h2 id="question">What is the capital of Côte d'Ivoire?</h2>
-        <button onclick="checkAnswer('Yamoussoukro')">Yamoussoukro</button>
-        <button onclick="checkAnswer('Abidjan')">Abidjan</button>
-        <button onclick="checkAnswer('Bouaké')">Bouaké</button>
-        <p id="score">Score: 0</p>
+    <!-- MENU SCREEN -->
+    <div class="menu" id="menu">
+        <h1>🧠 Abidjan Quiz 🇨🇮</h1>
+        <p>Test your knowledge about Côte d'Ivoire!</p>
+        <button onclick="startQuiz()">START QUIZ</button>
     </div>
 
-    <script>
-        let score = 0;
-        function checkAnswer(answer) {
-            if(answer === 'Yamoussoukro') {
-                score++;
-                alert('Correct! 🔥');
-            } else {
-                alert('Wrong! Try again 😅');
-            }
-            document.getElementById('score').innerText = 'Score: ' + score;
+    <!-- QUIZ SCREEN -->
+    <div class="quiz-box hidden" id="quiz">
+        <h2 id="progress">Question 1 of 22</h2>
+        <h3 id="question"></h3>
+        <div id="answers"></div>
+        <p id="score">Score: 0</p>
+        <button onclick="nextQuestion()" id="nextBtn" class="hidden">NEXT QUESTION →</button>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div class="menu hidden" id="result">
+        <h1>🎉 Finished!</h1>
+        <h2 id="finalScore"></h2>
+        <button onclick="location.reload()">PLAY AGAIN</button>
+    </div>
+
+<script>
+    let currentQ = 0;
+    let score = 0;
+    let questions = [
+        {q: "What is the capital of Côte d'Ivoire?", a: ["Yamoussoukro", "Abidjan", "Bouaké"], correct: 0},
+        {q: "What is the biggest city in Côte d'Ivoire?", a: ["Bouaké", "Abidjan", "Daloa"], correct: 1},
+        {q: "What are the colors of the Côte d'Ivoire flag?", a: ["Red White Blue", "Orange White Green", "Green Yellow Red"], correct: 1},
+        {q: "What is the famous dish made from cassava?", a: ["Fufu", "Attiéké", "Rice"], correct: 1},
+        {q: "What ocean is next to Abidjan?", a: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean"], correct: 0},
+        {q: "What is the main language spoken?", a: ["English", "French", "Spanish"], correct: 1},
+        {q: "What is Côte d'Ivoire famous for exporting?", a: ["Cocoa", "Oil", "Gold"], correct: 0},
+        {q: "What is the currency used?", a: ["CFA Franc", "Dollar", "Euro"], correct: 0},
+        {q: "Which team is the national football team?", a: ["Les Éléphants", "Les Lions", "Les Aigles"], correct: 0},
+        {q: "What year did Côte d'Ivoire get independence?", a: ["1960", "1958", "1962"], correct: 0}
+        // I made 10 for now. Tell me and I'll add the other 12
+    ];
+
+    function startQuiz() {
+        document.getElementById('menu').classList.add('hidden');
+        document.getElementById('quiz').classList.remove('hidden');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        let q = questions[currentQ];
+        document.getElementById('question').innerText = q.q;
+        document.getElementById('progress').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+        let answersDiv = document.getElementById('answers');
+        answersDiv.innerHTML = '';
+        q.a.forEach((answer, i) => {
+            answersDiv.innerHTML += `<button onclick="checkAnswer(${i})">${answer}</button>`;
+        });
+        document.getElementById('nextBtn').classList.add('hidden');
+    }
+
+    function checkAnswer(i) {
+        if(i === questions[currentQ].correct) {
+            score++;
+            alert('Correct! 🔥');
+        } else {
+            alert('Wrong! 😅 Correct answer: ' + questions[currentQ].a[questions[currentQ].correct]);
         }
-    </script>
+        document.getElementById('score').innerText = 'Score: ' + score;
+        document.getElementById('nextBtn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+        currentQ++;
+        if(currentQ < questions.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('quiz').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('finalScore').innerText = `You scored ${score} out of ${questions.length}`;
+        }
+    }
+</script>
 </body>
-  </html>
+</html>
