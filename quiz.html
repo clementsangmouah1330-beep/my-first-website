@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abidjan Quiz</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .quiz-box {
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 80%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-box">
+        <h1>🧠 Abidjan Quiz</h1>
+        <h2 id="question">What is the capital of Côte d'Ivoire?</h2>
+        <button onclick="checkAnswer('Yamoussoukro')">Yamoussoukro</button>
+        <button onclick="checkAnswer('Abidjan')">Abidjan</button>
+        <button onclick="checkAnswer('Bouaké')">Bouaké</button>
+        <p id="score">Score: 0</p>
+    </div>
+
+    <script>
+        let score = 0;
+        function checkAnswer(answer) {
+            if(answer === 'Yamoussoukro') {
+                score++;
+                alert('Correct! 🔥');
+            } else {
+                alert('Wrong! Try again 😅');
+            }
+            document.getElementById('score').innerText = 'Score: ' + score;
+        }
+    </script>
+</body>
+  </html>
